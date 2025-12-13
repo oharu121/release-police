@@ -35,7 +35,8 @@
     "test:all": "npm run typecheck && npm run lint && npm run test",
     "check:exports": "attw --pack",
     "prepublishOnly": "npm run build",
-    "release": "node dist/cli.js"
+    "release": "node dist/cli.js",
+    "token": "node scripts/get-token.mjs"
   },
   "keywords": [
     "release",
