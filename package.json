@@ -1,6 +1,6 @@
 {
   "name": "release-police",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Interactive release workflow with configurable steps",
   "type": "module",
   "main": "./index.js",
