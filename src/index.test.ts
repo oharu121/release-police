@@ -1,14 +1,23 @@
 import { describe, it, expect } from 'vitest';
-import { greet, add } from './index.js';
+import { defineConfig } from './index.js';
 
-describe('greet', () => {
-  it('should return a greeting message', () => {
-    expect(greet('World')).toBe('Hello, World!');
+describe('defineConfig', () => {
+  it('should return the config object as-is', () => {
+    const config = {
+      releaseBranches: ['main'],
+      commands: {
+        test: 'npm test',
+      },
+    };
+    expect(defineConfig(config)).toEqual(config);
   });
-});
 
-describe('add', () => {
-  it('should add two numbers correctly', () => {
-    expect(add(2, 3)).toBe(5);
+  it('should accept partial config', () => {
+    const config = {
+      commands: {
+        test: null,
+      },
+    };
+    expect(defineConfig(config)).toEqual(config);
   });
 });

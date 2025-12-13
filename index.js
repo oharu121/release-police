@@ -6,5 +6,5 @@
 
 'use strict';
 
-module.exports = require('./dist/index.js');
-module.exports.default = require('./dist/index.js').default;
+module.exports = require('./dist/index.cjs');
+module.exports.default = require('./dist/index.cjs').default;
