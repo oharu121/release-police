@@ -1,0 +1,69 @@
+{
+  "name": "release-police",
+  "version": "0.1.0",
+  "description": "A new npm package",
+  "type": "module",
+  "main": "./index.js",
+  "module": "./index.mjs",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "index.js",
+    "index.d.ts",
+    "index.mjs"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"src/**/*.{ts,js,json,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,js,json,md}\"",
+    "test:all": "npm run typecheck && npm run lint && npm run test",
+    "check:exports": "attw --pack",
+    "prepublishOnly": "npm run build",
+    "sync": "git pull --rebase && npm install && npm test",
+    "sync:quick": "git pull --rebase && npm install",
+    "release": "node scripts/release.mjs",
+    "token": "node scripts/get-token.mjs"
+  },
+  "keywords": [],
+  "author": "oharu121 <jefflin1201@gmail.com> (https://github.com/oharu121)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "tsup": "^8.5.1",
+    "@types/node": "^25.0.1",
+    "@arethetypeswrong/cli": "^0.18.2",
+    "vitest": "^4.0.15",
+    "@vitest/coverage-v8": "^4.0.15",
+    "@eslint/js": "^9.39.2",
+    "eslint": "^9.39.2",
+    "prettier": "^3.7.4",
+    "eslint-config-prettier": "^10.1.8",
+    "@typescript-eslint/eslint-plugin": "^8.49.0",
+    "@typescript-eslint/parser": "^8.49.0",
+    "@clack/prompts": "^0.11.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oharu121/release-police.git"
+  },
+  "bugs": {
+    "url": "https://github.com/oharu121/release-police/issues"
+  },
+  "homepage": "https://github.com/oharu121/release-police#readme"
+}
