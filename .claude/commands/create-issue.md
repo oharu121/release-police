@@ -34,10 +34,12 @@ Use AskUserQuestion with multiSelect=true:
 ### Step 4: Ask for Version/Milestone
 
 Read package.json to get current version (e.g., "1.0.0"), then use AskUserQuestion:
-- patch: 1.0.1
-- minor: 1.1.0
-- major: 2.0.0
+- patch: v1.0.1
+- minor: v1.1.0
+- major: v2.0.0
 - Skip (no milestone)
+
+Note: Always prefix versions with "v" (e.g., "v1.1.0" not "1.1.0") for milestone names.
 
 ### Step 5: Create Plan File
 
@@ -199,7 +201,7 @@ User runs `/create-issue` after implementing typecheck, lint, deploy commands:
 
 2. **Labels prompt** shows: enhancement, bug, documentation, refactor (multi-select)
 
-3. **Version prompt** shows: 1.0.1 (patch), 1.1.0 (minor), 2.0.0 (major), Skip
+3. **Version prompt** shows: v1.0.1 (patch), v1.1.0 (minor), v2.0.0 (major), Skip
 
 4. Creates `.plans/add-typecheck-lint-deploy-commands.md`
 
