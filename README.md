@@ -18,7 +18,7 @@ Interactive release workflow CLI with configurable steps. Automates version bump
 - Dry-run mode to preview changes
 - Skip individual steps via CLI flags
 - Automatic remote sync detection
-- Customizable test, build, and changelog commands
+- Customizable typecheck, lint, test, build, changelog, and deploy commands
 - GitHub release creation (draft or published)
 
 ## Installation
@@ -68,10 +68,13 @@ export default defineConfig({
 
   // Commands to run (set to null to skip)
   commands: {
-    test: 'npm run test:all',     // default
     install: 'npm install',        // run after pulling
+    typecheck: null,               // optional type checking
+    lint: null,                    // optional linting
+    test: 'npm run test',          // default
     build: null,                   // optional pre-release build
     changelog: null,               // optional changelog generation
+    deploy: null,                  // optional post-push deploy
   },
 
   // Git settings
@@ -91,11 +94,12 @@ export default defineConfig({
   steps: {
     checkBranch: true,
     syncRemote: true,
-    runTests: true,
+    runChecks: true,       // runs typecheck, lint, test in order
     commitChanges: true,
     versionBump: true,
     push: true,
-    githubRelease: false,  // Matches github.release
+    deploy: false,         // enable to run deploy command
+    githubRelease: false,  // matches github.release
   },
 });
 ```
@@ -121,9 +125,11 @@ For simple configurations, add to your `package.json`:
 |------|-------------|
 | `init` | Create a release.config.ts file with all options |
 | `--dry-run` | Preview what would happen without making changes |
-| `--skip-tests` | Skip the test step |
+| `--skip-checks` | Skip typecheck, lint, and test commands |
+| `--skip-tests` | Skip checks (deprecated, use `--skip-checks`) |
 | `--skip-sync` | Skip remote sync step |
 | `--skip-push` | Skip push to remote (local version bump only) |
+| `--skip-deploy` | Skip deploy command |
 | `--github-release` | Create GitHub release after push |
 | `--version-type <type>` | Pre-select version bump: `patch`, `minor`, or `major` |
 | `-c, --config <path>` | Path to config file |
@@ -131,12 +137,13 @@ For simple configurations, add to your `package.json`:
 ## Workflow Steps
 
 1. **Branch Check** - Verify you're on an allowed release branch
-2. **Remote Sync** - Fetch and pull latest changes if behind
-3. **Run Tests** - Execute your test command
+2. **Remote Sync** - Fetch and pull latest changes, run install command
+3. **Run Checks** - Execute typecheck, lint, and test commands in order
 4. **Commit Changes** - Stage and commit uncommitted changes
-5. **Version Bump** - Interactive version selection (patch/minor/major)
+5. **Version Bump** - Interactive version selection, run build and changelog commands
 6. **Push** - Push commits and tags to remote
-7. **GitHub Release** - Create GitHub release (optional)
+7. **Deploy** - Run deploy command (optional)
+8. **GitHub Release** - Create GitHub release (optional)
 
 ## Programmatic Usage
 

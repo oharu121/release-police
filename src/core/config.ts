@@ -7,10 +7,13 @@ const CONFIG_FILES = ['release.config.ts', 'release.config.js', 'release.config.
 const DEFAULT_CONFIG: ResolvedConfig = {
   releaseBranches: ['main', 'master'],
   commands: {
-    test: 'npm run test:all',
+    test: 'npm run test',
     install: 'npm install',
     build: null,
     changelog: null,
+    typecheck: null,
+    lint: null,
+    deploy: null,
   },
   git: {
     pullStrategy: 'rebase',
@@ -24,10 +27,12 @@ const DEFAULT_CONFIG: ResolvedConfig = {
   steps: {
     checkBranch: true,
     syncRemote: true,
-    runTests: true,
+    runChecks: true,
+    runTests: true, // @deprecated - kept for backward compatibility
     commitChanges: true,
     versionBump: true,
     push: true,
+    deploy: false,
     githubRelease: false,
   },
 };
@@ -101,6 +106,17 @@ async function loadConfigFile(filepath: string): Promise<ReleaseConfig> {
  * Merge user config with defaults
  */
 function mergeConfig(userConfig: ReleaseConfig): ResolvedConfig {
+  // Handle backward compatibility: runTests → runChecks
+  const steps = {
+    ...DEFAULT_CONFIG.steps,
+    ...userConfig.steps,
+  };
+
+  // If user specified runTests but not runChecks, use runTests value
+  if (userConfig.steps?.runTests !== undefined && userConfig.steps?.runChecks === undefined) {
+    steps.runChecks = userConfig.steps.runTests;
+  }
+
   return {
     releaseBranches: userConfig.releaseBranches ?? DEFAULT_CONFIG.releaseBranches,
     commands: {
@@ -115,10 +131,7 @@ function mergeConfig(userConfig: ReleaseConfig): ResolvedConfig {
       ...DEFAULT_CONFIG.github,
       ...userConfig.github,
     },
-    steps: {
-      ...DEFAULT_CONFIG.steps,
-      ...userConfig.steps,
-    },
+    steps,
   };
 }
 

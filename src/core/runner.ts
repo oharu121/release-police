@@ -4,10 +4,11 @@ import { clack } from '../utils/prompts.js';
 import {
   checkBranch,
   syncRemote,
-  runTests,
+  runChecks,
   checkAndCommit,
   bumpVersion,
   pushToRemote,
+  deploy,
   createGithubRelease,
 } from '../steps/index.js';
 
@@ -35,8 +36,11 @@ export async function runRelease(cliOptions: CliOptions = {}): Promise<void> {
   }
 
   // Apply CLI overrides to steps
-  if (cliOptions.skipTests) {
-    config.steps.runTests = false;
+  if (cliOptions.skipTests || cliOptions.skipChecks) {
+    config.steps.runChecks = false;
+  }
+  if (cliOptions.skipDeploy) {
+    config.steps.deploy = false;
   }
   if (cliOptions.skipSync) {
     config.steps.syncRemote = false;
@@ -59,10 +63,11 @@ export async function runRelease(cliOptions: CliOptions = {}): Promise<void> {
   // Run release steps
   await checkBranch(ctx);
   await syncRemote(ctx);
-  await runTests(ctx);
+  runChecks(ctx);
   await checkAndCommit(ctx);
   await bumpVersion(ctx);
   await pushToRemote(ctx);
+  deploy(ctx);
   await createGithubRelease(ctx);
 
   if (ctx.dryRun) {

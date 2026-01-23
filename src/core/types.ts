@@ -6,7 +6,7 @@ export type PullStrategy = 'rebase' | 'merge' | 'ff-only';
 export type VersionType = 'patch' | 'minor' | 'major';
 
 export interface CommandsConfig {
-  /** Command to run tests (default: 'npm run test:all') */
+  /** Command to run tests (default: 'npm run test') */
   test?: string | null;
   /** Command to install dependencies after pull (default: 'npm install') */
   install?: string | null;
@@ -14,6 +14,12 @@ export interface CommandsConfig {
   build?: string | null;
   /** Optional changelog generation command */
   changelog?: string | null;
+  /** Optional typecheck command to run before tests */
+  typecheck?: string | null;
+  /** Optional lint command to run before tests */
+  lint?: string | null;
+  /** Optional deploy command to run after push */
+  deploy?: string | null;
 }
 
 export interface GitConfig {
@@ -28,7 +34,9 @@ export interface StepsConfig {
   checkBranch?: boolean;
   /** Sync with remote before release (default: true) */
   syncRemote?: boolean;
-  /** Run test command (default: true) */
+  /** Run typecheck, lint, and test commands (default: true) */
+  runChecks?: boolean;
+  /** @deprecated Use runChecks instead */
   runTests?: boolean;
   /** Commit uncommitted changes (default: true) */
   commitChanges?: boolean;
@@ -36,6 +44,8 @@ export interface StepsConfig {
   versionBump?: boolean;
   /** Push to remote after version bump (default: true) */
   push?: boolean;
+  /** Run deploy command after push (default: false) */
+  deploy?: boolean;
   /** Create GitHub release after push (default: false) */
   githubRelease?: boolean;
 }
@@ -78,9 +88,12 @@ export interface ResolvedConfig {
 
 export interface CliOptions {
   dryRun?: boolean;
+  /** @deprecated Use skipChecks instead */
   skipTests?: boolean;
+  skipChecks?: boolean;
   skipSync?: boolean;
   skipPush?: boolean;
+  skipDeploy?: boolean;
   githubRelease?: boolean;
   versionType?: VersionType;
   config?: string;

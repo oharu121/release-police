@@ -27,7 +27,12 @@ const main = defineCommand({
     },
     'skip-tests': {
       type: 'boolean',
-      description: 'Skip the test step',
+      description: 'Skip checks (deprecated, use --skip-checks)',
+      default: false,
+    },
+    'skip-checks': {
+      type: 'boolean',
+      description: 'Skip typecheck, lint, and test commands',
       default: false,
     },
     'skip-sync': {
@@ -38,6 +43,11 @@ const main = defineCommand({
     'skip-push': {
       type: 'boolean',
       description: 'Skip push to remote (version bump only)',
+      default: false,
+    },
+    'skip-deploy': {
+      type: 'boolean',
+      description: 'Skip deploy command',
       default: false,
     },
     'github-release': {
@@ -59,8 +69,10 @@ const main = defineCommand({
     const options: CliOptions = {
       dryRun: args['dry-run'],
       skipTests: args['skip-tests'],
+      skipChecks: args['skip-checks'],
       skipSync: args['skip-sync'],
       skipPush: args['skip-push'],
+      skipDeploy: args['skip-deploy'],
       githubRelease: args['github-release'],
       config: args.config,
     };

@@ -25,10 +25,13 @@ describe('loadConfig', () => {
     expect(config).toEqual({
       releaseBranches: ['main', 'master'],
       commands: {
-        test: 'npm run test:all',
+        test: 'npm run test',
         install: 'npm install',
         build: null,
         changelog: null,
+        typecheck: null,
+        lint: null,
+        deploy: null,
       },
       git: {
         pullStrategy: 'rebase',
@@ -42,10 +45,12 @@ describe('loadConfig', () => {
       steps: {
         checkBranch: true,
         syncRemote: true,
+        runChecks: true,
         runTests: true,
         commitChanges: true,
         versionBump: true,
         push: true,
+        deploy: false,
         githubRelease: false,
       },
     });

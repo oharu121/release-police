@@ -10,10 +10,13 @@ export default defineConfig({
 
   // Commands to run during release
   commands: {
-    test: 'npm run test:all',  // Set to null to skip
     install: 'npm install',    // Run after pulling changes
+    typecheck: null,           // Optional: run type checking
+    lint: null,                // Optional: run linter
+    test: 'npm run test',      // Set to null to skip
     build: null,               // Optional: run before version bump
     changelog: null,           // Optional: generate changelog
+    deploy: null,              // Optional: run after push
   },
 
   // Git settings
@@ -33,10 +36,11 @@ export default defineConfig({
   steps: {
     checkBranch: true,
     syncRemote: true,
-    runTests: true,
+    runChecks: true,       // Runs typecheck, lint, test in order
     commitChanges: true,
     versionBump: true,
     push: true,
+    deploy: false,         // Enable to run deploy command
     githubRelease: false,
   },
 });
