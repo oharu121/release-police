@@ -229,10 +229,10 @@ npx release-police --github-release
 ## Development
 
 ```bash
-npm run build      # Build the package
-npm run test       # Run tests
-npm run lint       # Lint code
-npm run typecheck  # Type check
+pnpm run build      # Build the package
+pnpm run test       # Run tests
+pnpm run lint       # Lint code
+pnpm run typecheck  # Type check
 ```
 
 ## License
