@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-02-18
+
+### Fixed
+- Added `{ cause: error }` to re-thrown errors in config loader and exec utility to satisfy `preserve-caught-error` lint rule
+- Removed explicit `lib: ["ES2020"]` from `tsconfig.json` so `target: "ES2024"` serves as single source of truth for type definitions, fixing `TS2554` errors for `ErrorOptions`
+
 ## [1.1.0] - 2025-01-24
 
 ### Added

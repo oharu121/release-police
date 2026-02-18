@@ -1,4 +1,4 @@
-# /github-npm-release
+# /github-pnpm-release
 
 Create a GitHub issue, run release checks, bump version, and create a GitHub release.
 

@@ -4,7 +4,18 @@
       "Bash(npm run typecheck:*)",
       "Bash(npm run test:*)",
       "Bash(dir:*)",
-      "Bash(pnpm run lint)"
+      "Bash(pnpm run lint)",
+      "Bash(pnpm run typecheck)",
+      "Bash(gh api:*)",
+      "Bash(gh issue create:*)",
+      "Bash(git fetch:*)",
+      "Bash(pnpm pkg:*)",
+      "Bash(pnpm run test)",
+      "Bash(pnpm run build)",
+      "Bash(git ls-tree:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(pnpm version patch:*)"
     ]
   }
 }
