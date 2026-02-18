@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-02-18
+
+### Fixed
+- Added `--no-git-checks` to `pnpm publish` in CI workflow to fix `ERR_PNPM_GIT_UNKNOWN_BRANCH` error caused by detached HEAD on release-triggered checkouts
+
 ## [1.1.1] - 2026-02-18
 
 ### Fixed
