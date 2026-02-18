@@ -15,7 +15,10 @@
       "Bash(git ls-tree:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(pnpm version patch:*)"
+      "Bash(pnpm version patch:*)",
+      "Bash(git push)",
+      "Bash(git push:*)",
+      "Bash(gh release create:*)"
     ]
   }
 }
