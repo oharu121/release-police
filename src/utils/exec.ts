@@ -16,7 +16,7 @@ export function exec(command: string, silent = false): string {
     return result ?? '';
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    throw new Error(`Command failed: ${command}\n${message}`);
+    throw new Error(`Command failed: ${command}\n${message}`, { cause: error });
   }
 }
 

@@ -97,7 +97,8 @@ async function loadConfigFile(filepath: string): Promise<ReleaseConfig> {
     return (module as { default?: ReleaseConfig }).default ?? (module as ReleaseConfig);
   } catch (error) {
     throw new Error(
-      `Failed to load config from ${filepath}: ${error instanceof Error ? error.message : String(error)}`
+      `Failed to load config from ${filepath}: ${error instanceof Error ? error.message : String(error)}`,
+      { cause: error }
     );
   }
 }
