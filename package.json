@@ -61,7 +61,7 @@
   "devDependencies": {
     "typescript": "^6.0.2",
     "tsup": "^8.5.1",
-    "@types/node": "^25.0.1",
+    "@types/node": "^26.0.0",
     "@arethetypeswrong/cli": "^0.18.2",
     "vitest": "^4.0.15",
     "@vitest/coverage-v8": "^4.0.15",
