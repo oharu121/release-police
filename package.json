@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "typescript": "^6.0.2",
-    "tsup": "^8.5.1",
+    "tsup": "^9.0.0",
     "@types/node": "^26.1.0",
     "@arethetypeswrong/cli": "^0.18.2",
     "vitest": "^4.0.15",
